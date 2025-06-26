@@ -12,12 +12,13 @@ std::vector<uint8_t> FindOffsetJump(const std::vector<Lexeme>& kLexemes, std::op
     else {
         if (structures.operands[0] == TypeOperand::kIdentFar) {
             for (int i = 0; i < 6; ++i) {
-                result.push_back(0x00);
+                result.push_back(0x00);  // Why? Because for the FIXUPP section in 
+                                         //the object file I’m thinking of inserting fictitious 6 bytes, 
+                                         // because we don’t know what the address of the segment itself will be
             }
         }
     }
     return result;
-
 }
 
 ExactlyOperands FindExactlyOperands(const std::vector<Lexeme>& kLexemes, StructWithCom& structures) {
@@ -33,7 +34,7 @@ ExactlyOperands FindExactlyOperands(const std::vector<Lexeme>& kLexemes, StructW
         }
         else if (kLexemes[i].type.main_type == Type::kConst) {
             int number = 0;
-            if (kLexemes[i].lexeme.back() == 'b') { // Äâ³éêîâà ñèñòåìà
+            if (kLexemes[i].lexeme.back() == 'b') { // 
                 std::string binary = kLexemes[i].lexeme.substr(0, kLexemes[i].lexeme.size() - 1);
                 std::bitset<32> bits(binary);
                 number = static_cast<int>(bits.to_ulong());
@@ -61,7 +62,6 @@ ExactlyOperands FindExactlyOperands(const std::vector<Lexeme>& kLexemes, StructW
 
 std::vector<uint8_t> CountBytesForCommands(const std::vector<Lexeme>& kLexemes, std::optional<CommandInfo>& info, SizeActiveSeg& sizes, StructWithCom& structures) {
     std::vector<uint8_t> result;
-    uint8_t result_modrm;
 
     struct FillModrm {
         uint8_t mod : 2;
@@ -293,9 +293,6 @@ void CountBytesDirectives(int code, const std::vector<Lexeme>& kLexemes, SizeAct
     case 104:
     case 105:
         line_info.bytes = CountBytesForDirectives(kLexemes, value);
-        /*if (line_info.bytes.size() > line_info.size) {
-            GlobalErrorHandler.AddError(value.line, ErrorCode::kDifferentSizes);
-        }*/
         break;
     }
 }

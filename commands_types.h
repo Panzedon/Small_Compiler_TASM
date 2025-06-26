@@ -4,18 +4,18 @@
 #include <variant>
 
 enum class Type {
-    kDirec,       // Директивы
-    kInstruc,     // Инструкции
-    kSegReg,      // Сегментные регистры
-    kReg32,       // 32-битные регистры (заменил "32REG" на REG32 для корректного имени)
+    kDirec,       // 
+    kInstruc,     // 
+    kSegReg,      // 
+    kReg32,       // 
     kReg8,
-    kSize,        // Размеры данных
-    kPtr,         // Операторы типа PTR
-    kAddrSpec,    // Адресные спецификаторы
-    kSymb,        // Одинарные символы-операторы   
-    kUserIdent,  // Пользовательские идентификаторы
-    kConst,       // константы
-    kUnknown      // Неизвестный тип
+    kSize,        // 
+    kPtr,         // 
+    kAddrSpec,    // 
+    kSymb,           
+    kUserIdent,  
+    kConst,       
+    kUnknown      
 };
 
 enum class TypeConst {

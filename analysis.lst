@@ -66,8 +66,8 @@
  66  00000000                           end 
 
 
-Таблиця індентифікаторів:
-                Ім'я                 Тип        Сегмент  Зміщення
+Identifier Table:
+                Name                Type        Segment    Offset
 --------------------------------------------------
 
                Data1            NAME_SEG          Data1         0
@@ -91,8 +91,8 @@
               label3               LABEL          code2         0
 
 
-Таблиця сегментів:
-                Ім'я                        Розмір                      Зміщення
+Segment Table:
+                Name                          Size                        Offset
 --------------------------------------------------
                Data1                            32                             F
                Data2                            32                             E
@@ -101,8 +101,8 @@
 
 
 
-Таблиця сегментних регістрів:
- Сегменттний регістр                       Сегмент
+Segment Register Table:
+    Segment Register                       Segment
 --------------------------------------------------
                   cs                         code2
                   ds                         data1

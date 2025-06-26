@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 #include <cctype>
-#include <iomanip> // Для форматування виводу
-#include <algorithm> // Для toLowerCase
+#include <iomanip> // For formatted output
+#include <algorithm> // For toLowerCase
 #include <unordered_map>
 #include <stdexcept>
 #include <bitset>
@@ -13,10 +13,11 @@
 #include "first_view.h"
 #include "error_handler.h"
 #include "second_view.h"
-//#include "Second_view.h"
 
-SizeActiveSeg values = { 0, 0, 0 , ""};
+SizeActiveSeg values = { 0, 0, 0 , "" };
 std::vector<LineInfo> lines_info;
+
+// Trim leading whitespace
 std::string trimLeft(const std::string& str) {
     size_t start = str.find_first_not_of(" \t");
     return (start == std::string::npos) ? "" : str.substr(start);
@@ -28,13 +29,13 @@ int main() {
 
     std::ifstream inputFile(input_file_name);
     if (!inputFile) {
-        std::cerr << "Помилка: не вдалося відкрити файл " << input_file_name << '\n';
+        std::cerr << "Error: failed to open file " << input_file_name << '\n';
         return 2;
     }
 
     std::ofstream outputFile(output_file_name);
     if (!outputFile) {
-        std::cerr << "Помилка: не вдалося створити файл " << output_file_name << '\n';
+        std::cerr << "Error: failed to create file " << output_file_name << '\n';
         return 1;
     }
 
@@ -42,12 +43,10 @@ int main() {
     int rowNumber = 1;
     values.line = rowNumber;
 
+    // First pass
     while (std::getline(inputFile, line)) {
         std::string trimmedLine = trimLeft(line);
-        if (trimmedLine.empty()) {
-
-        }
-        else {
+        if (!trimmedLine.empty()) {
             int last_val = values.local_size;
             lines_info.push_back({ values.line , values.seg, static_cast<uint16_t>(values.local_size), static_cast<uint8_t>(values.local_size - last_val), {} });
             std::vector<Lexeme> lexemes = LexicalAnalyzer(trimmedLine);
@@ -57,6 +56,8 @@ int main() {
         values.line++;
         rowNumber++;
     }
+
+    // Second pass
     inputFile.clear();
     inputFile.seekg(0, std::ios::beg);
     rowNumber = 1;
@@ -87,18 +88,20 @@ int main() {
             outputFile << trimmedLine << "\n";
 
             line_code++;
-
         }
         rowNumber++;
-
     }
+
+    // If errors exist, print them
     if (GlobalErrorHandler.HaveError()) {
         outputFile << "\n\n";
         GlobalErrorHandler.print(outputFile);
     }
+
+    // Identifier table
     outputFile << std::setfill(' ');
-    outputFile << "\n\nТаблиця індентифікаторів:\n";
-    outputFile << std::setw(20) << "Ім'я" << std::setw(20) << "Тип" << std::setw(15) << "Сегмент" << std::setw(10) << "Зміщення" << "\n";
+    outputFile << "\n\nIdentifier Table:\n";
+    outputFile << std::setw(20) << "Name" << std::setw(20) << "Type" << std::setw(15) << "Segment" << std::setw(10) << "Offset" << "\n";
     outputFile << std::string(50, '-') << "\n\n";
 
     for (const auto& idName : vector_identfiers) {
@@ -114,18 +117,20 @@ int main() {
             << std::setw(20) << typeStr
             << std::setw(15) << data.segment
             << std::setw(10) << std::hex << std::uppercase << data.offset
-            << std::dec << "\n";  // смещение в hex, потом возвращаемся к dec
+            << std::dec << "\n";  // Offset in hex, then switch back to decimal
     }
 
-    outputFile << "\n\nТаблиця сегментів:\n";
-    outputFile << std::setw(20) << "Ім'я" << std::setw(30) << "Розмір" << std::setw(30) << "Зміщення" << "\n";
+    // Segment table
+    outputFile << "\n\nSegment Table:\n";
+    outputFile << std::setw(20) << "Name" << std::setw(30) << "Size" << std::setw(30) << "Offset" << "\n";
     outputFile << std::string(50, '-') << "\n";
     for (const auto& id : segment_table) {
         outputFile << std::dec << std::setw(20) << id.name << std::setw(30) << id.defaultSize << std::setw(30) << std::hex << id.current_offset << "\n";
     }
 
-    outputFile << "\n\n\nТаблиця сегментних регістрів:\n";
-    outputFile << std::setw(20) << "Сегменттний регістр" << std::setw(30) << "Сегмент" << "\n";
+    // Segment register table
+    outputFile << "\n\n\nSegment Register Table:\n";
+    outputFile << std::setw(20) << "Segment Register" << std::setw(30) << "Segment" << "\n";
     outputFile << std::string(50, '-') << "\n";
     for (const auto& id : segment_regist) {
         outputFile << std::setw(20) << id.regis << std::setw(30) << id.target << "\n";
@@ -134,10 +139,9 @@ int main() {
     inputFile.close();
     outputFile.close();
 
-    std::cout << "Аналіз завершено! Результати збережені у файл: " << output_file_name << '\n';
+    std::cout << "Analysis complete! Results saved to file: " << output_file_name << '\n';
     return 0;
 }
-
 
 
 

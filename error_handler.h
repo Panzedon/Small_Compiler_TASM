@@ -25,7 +25,9 @@ private:
 
     std::unordered_map< ErrorCode, std::string> ListError = {
         {ErrorCode::kDifferentSizes, "Different sizes of operands"},
-        {ErrorCode::kIncorrectOperands, "Incorrect operands in command"}
+        {ErrorCode::kIncorrectOperands, "Incorrect operands in command"},
+        {ErrorCode::kIncorrectAddr, "Incorrect addresing"},
+        {ErrorCode::kUndefinedLabel, "Undefined label"}
     };
 
     std::vector<Error> errors_;
