@@ -1,0 +1,112 @@
+  1  
+  2  00000000                           Data1 segment
+  3  00000000   73                      V1db16 db 73h
+  4  00000001   1C                      V4db2 db 011100b
+  5  00000002   48 65 6C 6C 6F          V5dbS db 'Hello'
+  6  
+  7  00000007   77 3F                   V1dw16 dw 3f77h
+  8  00000009   09 C0                   V2dw10 dw -16375
+  9  
+ 10  0000000B   0E 00 00 00             V3dd2 dd 00001110b
+ 11  0000000F                           Data1 ends
+ 12  
+ 13  00000000                           Data2 segment
+ 14  00000000   7B                      V2db10 db 123
+ 15  00000001   85                      V3db10 db -123d
+ 16  00000002   3D 9A 02 00             V1dd16 dd 29a3dh
+ 17  00000006   E8 FD 00 00             V2dd10 dd 65000
+ 18  0000000A   BC 0E                   V3dw10 dw 3772d
+ 19  0000000C   40 00                   V4dw2 dw 01000000b
+ 20  0000000E                           Data2 ends
+ 21  
+ 22  00000000                           code1 segment
+ 23  00000000                           assume cs:code1, ds:data1, gs:data2
+ 24  00000000   61                      popad
+ 25  
+ 26  00000001   50                      push eax
+ 27  00000002                           label1:
+ 28  00000002   F7 5C B0 02             neg dword ptr [eax + esi * 4 + 2]
+ 29  00000006   65 F7 5C B0 02          neg dword ptr gs:[eax + esi * 4 + 2]
+ 30  
+ 31  0000000B   83 D0 15                adc eax, 010101b
+ 32  0000000E   14 25                   adc al, 25h
+ 33  
+ 34  00000010   1B C1                   sbb eax, ecx
+ 35  00000012   1A C1                   sbb al, cl
+ 36  00000014   72 25                   jnae label2
+ 37  
+ 38  00000016   C5 5C B0 06             lds ebx, [eax + esi * 4 + 6]
+ 39  0000001A   65 C5 5C B0 06          lds ebx, gs:[eax + esi * 4 + 6]
+ 40  
+ 41  0000001F   89 44 8B 0C             mov [ebx + ecx * 4 + 12], eax
+ 42  00000023   88 44 8B 0C             mov byte ptr [ebx + ecx * 4 + 12], al
+ 43  
+ 44  00000027   83 64 8B 0C 15          and DWORD PTR [ebx + ecx * 4 + 12], 010101b
+ 45  0000002C   81 64 70 02 5F 2B 00 00 and DWORD ptr [eax + esi * 2 + 2], 11103
+ 46  00000034   81 24 8A 3D 9A 02 00    and dword ptr [edx + ecx * 4 + 0], 29a3dh
+ 47  0000003B                           label2:
+ 48  0000003B   72 C5                   jnae label1
+ 49  
+ 50  
+ 51  0000003D   EA 00 00 00 00 00 00    jmp far ptr label3
+ 52  
+ 53  
+ 54  
+ 55  00000044                           code1 ends
+ 56  
+ 57  
+ 58  00000000                           code2 segment
+ 59  
+ 60  00000000                           assume cs:code2
+ 61  
+ 62  00000000                           label3:
+ 63  
+ 64  00000000                           code2 ends
+ 65  
+ 66  00000000                           end 
+
+
+Таблиця індентифікаторів:
+                Ім'я                 Тип        Сегмент  Зміщення
+--------------------------------------------------
+
+               Data1            NAME_SEG          Data1         0
+              V1db16               CONST          Data1         1
+               V4db2               CONST          Data1         2
+               V5dbS               CONST          Data1         7
+              V1dw16               CONST          Data1         9
+              V2dw10               CONST          Data1         B
+               V3dd2               CONST          Data1         F
+               Data2            NAME_SEG          Data2         0
+              V2db10               CONST          Data2         1
+              V3db10               CONST          Data2         2
+              V1dd16               CONST          Data2         6
+              V2dd10               CONST          Data2         A
+              V3dw10               CONST          Data2         C
+               V4dw2               CONST          Data2         E
+               code1            NAME_SEG          code1         0
+              label1               LABEL          code1         2
+              label2               LABEL          code1        3B
+               code2            NAME_SEG          code2         0
+              label3               LABEL          code2         0
+
+
+Таблиця сегментів:
+                Ім'я                        Розмір                      Зміщення
+--------------------------------------------------
+               Data1                            32                             F
+               Data2                            32                             E
+               code1                            32                            44
+               code2                            32                             0
+
+
+
+Таблиця сегментних регістрів:
+ Сегменттний регістр                       Сегмент
+--------------------------------------------------
+                  cs                         code2
+                  ds                         data1
+                  ss                       Nothing
+                  es                       Nothing
+                  gs                         data2
+                  fs                       Nothing
