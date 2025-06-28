@@ -33,6 +33,8 @@
 
 # Visual Studio temporary files
 .vs/
+*.vcxproj.filters
+*.vcxproj.user
 *.user
 *.suo
 *.cache

@@ -131,18 +131,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="error_handler.cpp" />
-    <ClCompile Include="first_view.cpp" />
-    <ClCompile Include="lexical.cpp" />
+    <ClCompile Include="compiler.cpp" />
+    <ClCompile Include="Listing\error_handler.cpp" />
+    <ClCompile Include="Listing\first_view.cpp" />
+    <ClCompile Include="Listing\lexical.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="second_view.cpp" />
+    <ClCompile Include="Listing\second_view.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commands_types.h" />
-    <ClInclude Include="error_handler.h" />
-    <ClInclude Include="first_view.h" />
-    <ClInclude Include="lexical.h" />
-    <ClInclude Include="second_view.h" />
+    <ClInclude Include="compiler.h" />
+    <ClInclude Include="Listing\commands_types.h" />
+    <ClInclude Include="Listing\error_handler.h" />
+    <ClInclude Include="Listing\first_view.h" />
+    <ClInclude Include="Listing\lexical.h" />
+    <ClInclude Include="Listing\second_view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

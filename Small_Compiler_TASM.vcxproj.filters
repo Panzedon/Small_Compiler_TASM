@@ -15,36 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lexical.cpp">
+    <ClCompile Include="Listing\error_handler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="first_view.cpp">
+    <ClCompile Include="Listing\first_view.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Listing\lexical.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="second_view.cpp">
+    <ClCompile Include="Listing\main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="error_handler.cpp">
+    <ClCompile Include="Listing\second_view.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="compiler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lexical.h">
+    <ClInclude Include="Listing\commands_types.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="first_view.h">
+    <ClInclude Include="Listing\error_handler.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="commands_types.h">
+    <ClInclude Include="Listing\first_view.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="second_view.h">
+    <ClInclude Include="Listing\lexical.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="error_handler.h">
+    <ClInclude Include="Listing\second_view.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="compiler.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
