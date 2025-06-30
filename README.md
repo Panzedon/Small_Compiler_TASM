@@ -46,18 +46,31 @@ Segment overrides can be specified explicitly. If needed, they are automatically
 
 Machine instructions
 Currently supported instructions include:
+
 POPAD
+
 PUSH reg
+
 NEG mem
+
 ADC reg, imm
+
 SBB reg, reg
+
 LDS reg, mem
+
 MOV mem, reg
+
 AND mem, imm
+
 JNAE
+
 JMP (direct intersegment addressing)
 
 Where:
+
 reg — 8-bit or 32-bit general-purpose register
+
 mem — memory operand address
+
 imm — 8-bit or 32-bit immediate constant
