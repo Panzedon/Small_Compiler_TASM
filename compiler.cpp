@@ -41,7 +41,6 @@ int CallCompiler(std::string input_file_name) {
         values.line++;
         rowNumber++;
     }
-
     // Second pass
     inputFile.clear();
     inputFile.seekg(0, std::ios::beg);

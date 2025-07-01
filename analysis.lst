@@ -33,7 +33,7 @@
  33  
  34  00000010   1B C1                   sbb eax, ecx
  35  00000012   1A C1                   sbb al, cl
- 36  00000014   72 25                   jnae label2
+ 36  00000014   72 21                   jnae label2
  37  
  38  00000016   C5 5C B0 06             lds ebx, [eax + esi * 4 + 6]
  39  0000001A   65 C5 5C B0 06          lds ebx, gs:[eax + esi * 4 + 6]
@@ -43,16 +43,16 @@
  43  
  44  00000027   83 64 8B 0C 15          and DWORD PTR [ebx + ecx * 4 + 12], 010101b
  45  0000002C   81 64 70 02 5F 2B 00 00 and DWORD ptr [eax + esi * 2 + 2], 11103
- 46  00000034   81 24 8A 3D 9A 02 00    and dword ptr [edx + ecx * 4 + 0], 29a3dh
- 47  0000003B                           label2:
- 48  0000003B   72 C5                   jnae label1
+ 46  00000032   81 24 8A 3D 9A 02 00    and dword ptr [edx + ecx * 4 + 0], 29a3dh
+ 47  00000037                           label2:
+ 48  00000037   72 C9                   jnae label1
  49  
  50  
- 51  0000003D   EA 00 00 00 00 00 00    jmp far ptr label3
+ 51  00000039   EA 00 00 00 00 00 00    jmp far ptr label3
  52  
  53  
  54  
- 55  00000044                           code1 ends
+ 55  00000040                           code1 ends
  56  
  57  
  58  00000000                           code2 segment
@@ -64,6 +64,12 @@
  64  00000000                           code2 ends
  65  
  66  00000000                           end 
+
+
+[Line 39] Error: Incorrect structure of command
+[Line 39] Error: Incorrect structure of command
+[Line 67] Error: Incorrect structure of command
+[Line 67] Error: Incorrect structure of command
 
 
 Identifier Table:
@@ -86,7 +92,7 @@ Identifier Table:
                V4dw2               CONST          Data2         E
                code1            NAME_SEG          code1         0
               label1               LABEL          code1         2
-              label2               LABEL          code1        3B
+              label2               LABEL          code1        37
                code2            NAME_SEG          code2         0
               label3               LABEL          code2         0
 
@@ -96,7 +102,7 @@ Segment Table:
 --------------------------------------------------
                Data1                            32                             F
                Data2                            32                             E
-               code1                            32                            44
+               code1                            32                            40
                code2                            32                             0
 
 

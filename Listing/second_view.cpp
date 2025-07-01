@@ -1,5 +1,7 @@
 #include "second_view.h"
 #include "commands_types.h"
+
+// FindOffsetJump – finds and sets the offset for a jump instruction
 std::vector<uint8_t> FindOffsetJump(const std::vector<Lexeme>& kLexemes, std::optional<CommandInfo>& info, SizeActiveSeg& sizes, StructWithCom& structures) {
     std::vector<uint8_t> result;
     int offset;
@@ -21,6 +23,7 @@ std::vector<uint8_t> FindOffsetJump(const std::vector<Lexeme>& kLexemes, std::op
     return result;
 }
 
+// FindExactlyOperands – searches for specific operands (which exact register, what constant value, etc.)
 ExactlyOperands FindExactlyOperands(const std::vector<Lexeme>& kLexemes, StructWithCom& structures) {
     ExactlyOperands result;
     for (int i = 0; i < kLexemes.size(); i++) {
@@ -60,6 +63,9 @@ ExactlyOperands FindExactlyOperands(const std::vector<Lexeme>& kLexemes, StructW
     return result;
 }
 
+// CountBytesForCommands – calculates the bytes for instructions (determines their values), 
+// sets bytes for ModRM, SIB, and constants, 
+// based on the CommandInfo structure and the operands
 std::vector<uint8_t> CountBytesForCommands(const std::vector<Lexeme>& kLexemes, std::optional<CommandInfo>& info, SizeActiveSeg& sizes, StructWithCom& structures) {
     std::vector<uint8_t> result;
 
@@ -218,6 +224,7 @@ std::vector<uint8_t> CountBytesFromConstant(T value, int size) {
     return bytes;
 }
 
+// CountBytesForDirectives – determines the byte values for directives like db, dw, dd, etc.
 std::vector<uint8_t> CountBytesForDirectives(const std::vector<Lexeme>& kLexemes, SizeActiveSeg& value) {
     std::vector<uint8_t> result;
     int size = 0;
@@ -272,6 +279,7 @@ std::vector<uint8_t> CountBytesForDirectives(const std::vector<Lexeme>& kLexemes
     }
     return result;
 }
+
 void CountBytesDirectives(int code, const std::vector<Lexeme>& kLexemes, SizeActiveSeg& value, LineInfo& line_info) {
     switch (code) {
     case 101:
@@ -296,6 +304,9 @@ void CountBytesDirectives(int code, const std::vector<Lexeme>& kLexemes, SizeAct
         break;
     }
 }
+
+// SecondView – performs the second pass, resolves the final byte values, 
+// and also fills the byte vector for lines to be written to the object file
 void SecondView(const std::vector<Lexeme>& kLexemes, std::vector<Type>& lexemes_keys, SizeActiveSeg& value, LineInfo &line_info) {
     if (kLexemes.empty()) {
         return;

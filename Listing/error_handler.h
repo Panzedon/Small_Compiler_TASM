@@ -10,6 +10,7 @@ enum class ErrorCode {
     kDifferentSizes,
     kIncorrectOperands,
     kIncorrectAddr,
+    kIncorrectStructureOfCommands
 
 };
 
@@ -27,7 +28,8 @@ private:
         {ErrorCode::kDifferentSizes, "Different sizes of operands"},
         {ErrorCode::kIncorrectOperands, "Incorrect operands in command"},
         {ErrorCode::kIncorrectAddr, "Incorrect addresing"},
-        {ErrorCode::kUndefinedLabel, "Undefined label"}
+        {ErrorCode::kUndefinedLabel, "Undefined label"},
+        {ErrorCode::kIncorrectStructureOfCommands, "Incorrect structure of command"}
     };
 
     std::vector<Error> errors_;
